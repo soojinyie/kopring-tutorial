@@ -2,6 +2,7 @@ package com.example.demo.blog.controller
 
 import com.example.demo.blog.dto.BlogDto
 import com.example.demo.blog.service.BlogService
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -18,7 +19,7 @@ class BlogController (
 //    그 호출은 BlogService 의 searchKakao 함수가 받으면서 println 을 한 번 하고 "searchKakao" 문자열을 리턴함
 //    그 값을 search 함수에서 result 에 담아서 리턴하면 클라이언트 측에 전달됨
     @GetMapping("")
-    fun search(@RequestBody blogDto: BlogDto): String? {
+    fun search(@RequestBody @Valid blogDto: BlogDto): String? {
         val result = blogService.searchKakao(blogDto)
         return result
     }

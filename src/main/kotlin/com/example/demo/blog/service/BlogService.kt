@@ -15,25 +15,6 @@ class BlogService {
     lateinit var restApiKey: String
 
     fun searchKakao(blogDto: BlogDto): String? {
-        val msgLst = mutableListOf<ExceptionMsg>()
-
-        if (blogDto.query.trim().isEmpty()){
-            msgLst.add(ExceptionMsg.EMPTY_QUERY)
-        }
-
-        if (blogDto.sort.trim() !in arrayOf("accuracy", "recency")){
-            msgLst.add(ExceptionMsg.NOT_IN_SORT)
-        }
-
-        when {
-            blogDto.page < 1 -> msgLst.add(ExceptionMsg.LESS_THAN_MIN)
-            blogDto.page > 50 -> msgLst.add(ExceptionMsg.MORE_THAN_MAX)
-        }
-
-        if (msgLst.isNotEmpty()){
-            val message = msgLst.joinToString {it.msg}
-            throw  InvalidInputException(message)
-        }
 
         val webClient = WebClient
             .builder()
@@ -57,12 +38,4 @@ class BlogService {
 
         return result
     }
-}
-
-private enum class ExceptionMsg(val msg: String){
-    EMPTY_QUERY("query parameter required"),
-    NOT_IN_SORT("sort parameter should be accuracy or recency"),
-    LESS_THAN_MIN("page parameter should not be less than 1"),
-    MORE_THAN_MAX("page parameter should not exceed 50")
-
 }

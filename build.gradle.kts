@@ -31,7 +31,8 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	// https://mvnrepository.com/artifact/org.springframework/spring-webflux
 	implementation("org.springframework:spring-webflux")
-
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 }
 
 allOpen {
